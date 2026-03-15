@@ -1,119 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Manager - Download</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background-color: #0d0f14;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-align: center;
-    }
-    p {
-      color: #cbd5e1;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    form, .download-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    input[type="email"] {
-      padding: 12px 16px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      width: 250px;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      opacity: 0.85;
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 0.95rem;
-      color: #22c55e;
-      text-align: center;
-    }
-    .download-link {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #3b82f6;
-      border-radius: 8px;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .download-link:hover {
-      background: #6366f1;
-    }
-  </style>
-</head>
-<body>
+<!-- زر التنزيل -->
+<button id="downloadBtn">Download</button>
 
-  <h1>Client Manager</h1>
-  <p>Enter your email to get access to the download link</p>
-
+<!-- نموذج البريد -->
+<div id="emailFormSection" style="display:none;">
   <form id="emailForm">
-    <input type="email" id="email" placeholder="Your email address" required>
-    <button type="submit">Get Access</button>
+    <input type="email" id="emailInput" placeholder="Enter your email" required>
+    <button type="submit">Submit</button>
   </form>
+</div>
 
-  <div class="message" id="message"></div>
-
-  <div class="download-section" id="downloadSection" style="display: none;">
-    <p>Thank you! Click the button below to download the app:</p>
-    <a href="client_manager_v2.exe" class="download-link" download>Download Client Manager</a>
-  </div>
-
-  <script>
-    const form = document.getElementById('emailForm');
-    const message = document.getElementById('message');
-    const downloadSection = document.getElementById('downloadSection');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-
-      // تخزين البريد هنا (يمكن ربطه لاحقاً بـ Google Sheets أو قاعدة بيانات)
-      console.log("Email collected:", email);
-
-      // إظهار رسالة نجاح
-      message.textContent = "Success! You can now download the app.";
-
-      // إخفاء النموذج واظهار رابط التحميل
-      form.style.display = "none";
-      downloadSection.style.display = "flex";
-    });
-  </script>
-
-</body>
-</html>
+<!-- رابط التحميل -->
+<div id="downloadSection" style="display:none;">
+  <a href="client_manager_v2.exe" download>Download Client Manager</a>
+</div>
