@@ -1,40 +1,58 @@
-// عند تحميل الصفحة
-window.addEventListener('DOMContentLoaded', () => {
-  const storedEmail = localStorage.getItem('clientEmail');
-  const emailFormSection = document.getElementById('emailFormSection');
-  const downloadSection = document.getElementById('downloadSection');
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 
-  if (storedEmail) {
-    // إذا البريد موجود سابقًا → إظهار رابط التحميل مباشرة
-    emailFormSection.style.display = 'none';
-    downloadSection.style.display = 'flex';
-  }
-});
+export default function DownloadSection() {
+  const [email, setEmail] = useState('');
+  const [storedEmail, setStoredEmail] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
-// عند الضغط على زر التنزيل
-document.getElementById('downloadBtn').addEventListener('click', () => {
-  const storedEmail = localStorage.getItem('clientEmail');
-  const emailFormSection = document.getElementById('emailFormSection');
-  const downloadSection = document.getElementById('downloadSection');
+  useEffect(() => {
+    const emailFromStorage = localStorage.getItem('clientEmail');
+    if (emailFromStorage) setStoredEmail(emailFromStorage);
+  }, []);
 
-  if (!storedEmail) {
-    // إذا البريد غير موجود → إظهار نموذج البريد
-    emailFormSection.style.display = 'flex';
-  } else {
-    // إذا البريد موجود → إظهار التحميل مباشرة
-    downloadSection.style.display = 'flex';
-  }
-});
+  const handleDownloadClick = () => {
+    if (!storedEmail) {
+      setShowForm(true);
+    }
+  };
 
-// عند إرسال نموذج البريد
-document.getElementById('emailForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const emailInput = document.getElementById('emailInput').value;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem('clientEmail', email);
+    setStoredEmail(email);
+    setShowForm(false);
+  };
 
-  // حفظ البريد في localStorage
-  localStorage.setItem('clientEmail', emailInput);
+  return (
+    <div>
+      <Button onClick={handleDownloadClick}>Download</Button>
 
-  // إظهار التحميل وإخفاء النموذج
-  document.getElementById('emailFormSection').style.display = 'none';
-  document.getElementById('downloadSection').style.display = 'flex';
-});
+      {showForm && !storedEmail && (
+        <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-2">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="px-3 py-2 rounded border"
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      )}
+
+      {storedEmail && (
+        <div className="mt-4">
+          <a
+            href="/client_manager_v2.exe"
+            download
+            className="px-4 py-3 bg-blue-600 text-white rounded"
+          >
+            Download Client Manager
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
