@@ -1,203 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Client Manager</title>
-
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#0d0f14;
-color:white;
-}
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-border-bottom:1px solid #222;
-}
-
-.logo{
-font-size:20px;
-font-weight:bold;
-}
-
-button{
-background:linear-gradient(45deg,#7c3aed,#2563eb);
-border:none;
-color:white;
-padding:12px 25px;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-}
-
-.hero{
-text-align:center;
-padding:120px 20px;
-}
-
-.hero h1{
-font-size:60px;
-margin-bottom:20px;
-}
-
-.hero p{
-color:#aaa;
-font-size:20px;
-max-width:600px;
-margin:auto;
-margin-bottom:40px;
-}
-
-.features{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:80px 40px;
-max-width:1100px;
-margin:auto;
-}
-
-.feature{
-background:#13151c;
-padding:25px;
-border-radius:10px;
-border:1px solid #222;
-}
-
-.feature h3{
-margin-top:0;
-}
-
-.download{
-text-align:center;
-padding:100px 20px;
-}
-
-footer{
-text-align:center;
-padding:30px;
-border-top:1px solid #222;
-color:#888;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Manager - Download</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #0d0f14;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+    p {
+      color: #cbd5e1;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    form, .download-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    input[type="email"] {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      width: 250px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #22c55e;
+      text-align: center;
+    }
+    .download-link {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #3b82f6;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .download-link:hover {
+      background: #6366f1;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
+  <h1>Client Manager</h1>
+  <p>Enter your email to get access to the download link</p>
 
-<div class="logo">
-Client Manager
-</div>
+  <form id="emailForm">
+    <input type="email" id="email" placeholder="Your email address" required>
+    <button type="submit">Get Access</button>
+  </form>
 
-<button onclick="downloadApp()">
-Download
-</button>
+  <div class="message" id="message"></div>
 
-</header>
+  <div class="download-section" id="downloadSection" style="display: none;">
+    <p>Thank you! Click the button below to download the app:</p>
+    <a href="client_manager_v2.exe" class="download-link" download>Download Client Manager</a>
+  </div>
 
-<section class="hero">
+  <script>
+    const form = document.getElementById('emailForm');
+    const message = document.getElementById('message');
+    const downloadSection = document.getElementById('downloadSection');
 
-<h1>Client Manager</h1>
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
 
-<p>
-A simple desktop application to manage clients easily.
-Perfect for freelancers and small businesses.
-</p>
+      // تخزين البريد هنا (يمكن ربطه لاحقاً بـ Google Sheets أو قاعدة بيانات)
+      console.log("Email collected:", email);
 
-<button onclick="downloadApp()">
-Download for Windows
-</button>
+      // إظهار رسالة نجاح
+      message.textContent = "Success! You can now download the app.";
 
-</section>
-
-
-<section class="features">
-
-<div class="feature">
-<h3>Add Clients</h3>
-<p>Easily add and organize all your clients.</p>
-</div>
-
-<div class="feature">
-<h3>Fast Search</h3>
-<p>Find any client instantly by name or ID.</p>
-</div>
-
-<div class="feature">
-<h3>Track Last Contact</h3>
-<p>See when you last contacted each client.</p>
-</div>
-
-<div class="feature">
-<h3>Active / Inactive Status</h3>
-<p>Know which clients are active or inactive.</p>
-</div>
-
-<div class="feature">
-<h3>Quick Control Menu</h3>
-<p>Double click a client to edit or delete quickly.</p>
-</div>
-
-<div class="feature">
-<h3>Dark Interface</h3>
-<p>Clean and modern dark interface.</p>
-</div>
-
-</section>
-
-
-<section class="download">
-
-<h2>Download Client Manager</h2>
-
-<p style="color:#aaa">
-Free desktop software for Windows
-</p>
-
-<br>
-
-<button onclick="downloadApp()">
-Download Now
-</button>
-
-</section>
-
-<footer style="background:#111;color:#ccc;text-align:center;padding:20px;margin-top:40px;">
-    <p>Contact</p>
-    <p>
-        Email: 
-        <a href="mailto:your@email.com" style="color:#4da3ff;text-decoration:none;">
-            adnanvic2023@gmail.com
-        </a>
-    </p>
-    <p style="font-size:12px;color:#777;">
-        © 2026 Client Manager
-    </p>
-</footer>
-
-
-<script>
-
-function downloadApp(){
-
-window.location.href="download/client_manager_v2.exe"
-
-}
-
-</script>
+      // إخفاء النموذج واظهار رابط التحميل
+      form.style.display = "none";
+      downloadSection.style.display = "flex";
+    });
+  </script>
 
 </body>
 </html>
