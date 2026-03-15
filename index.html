@@ -1,15 +1,224 @@
-<!-- زر التنزيل -->
-<button id="downloadBtn">Download</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Manager</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0d0f14;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  header h1 {
+    font-size: 3em;
+    background: linear-gradient(90deg, #8a2be2, #00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    animation: fadeInDown 1s ease forwards;
+  }
+  header p {
+    font-size: 1.2em;
+    color: #bbb;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+  header button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #8a2be2, #00bfff);
+    color: #fff;
+    cursor: pointer;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 1s;
+    opacity: 0;
+  }
+  section#features {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .feature-card {
+    background-color: #13151c;
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1 1 250px;
+    text-align: center;
+    border: 1px solid #ffffff20;
+    transition: transform 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+    background: #16182a;
+  }
+  .feature-card h3 {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #8a2be2;
+  }
+  .feature-card p {
+    color: #ccc;
+    font-size: 0.95em;
+  }
+  #emailFormSection, #downloadSection {
+    max-width: 400px;
+    margin: 40px auto;
+    background-color: #13151c;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ffffff20;
+    text-align: center;
+    display: none;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  #emailFormSection input[type="email"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    margin-right: 10px;
+    width: 70%;
+  }
+  #emailFormSection button, #downloadSection a {
+    margin-top: 15px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #8a2be2, #00bfff);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #888;
+  }
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px);}
+    100% { opacity: 1; transform: translateY(0); opacity:1;}
+  }
+</style>
+</head>
+<body>
 
-<!-- نموذج البريد -->
-<div id="emailFormSection" style="display:none;">
-  <form id="emailForm">
-    <input type="email" id="emailInput" placeholder="Enter your email" required>
-    <button type="submit">Submit</button>
-  </form>
+<header>
+  <h1>Client Manager</h1>
+  <p>Organize your clients easily with a clean dark interface</p>
+  <button id="downloadBtn">Download App</button>
+</header>
+
+<section id="features">
+  <div class="feature-card">
+    <h3>Add/Edit/Delete Clients</h3>
+    <p>Manage your full client list easily with simple controls.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Full Client Info</h3>
+    <p>Access complete client details instantly in a clean layout.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Track Last Contact</h3>
+    <p>Always know when you last reached out to each client.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Active / Inactive Status</h3>
+    <p>Toggle client status to stay focused on what matters.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Fast Search</h3>
+    <p>Find any client instantly by name or ID.</p>
+  </div>
+</section>
+
+<div id="emailFormSection">
+  <p>Please enter your email to download the app:</p>
+  <input type="email" id="emailInput" placeholder="Enter your email">
+  <button id="submitEmail">Submit</button>
 </div>
 
-<!-- رابط التحميل -->
-<div id="downloadSection" style="display:none;">
-  <a href="client_manager_v2.exe" download>Download Client Manager</a>
+<div id="downloadSection">
+  <p>Thank you! Click the link below to download:</p>
+  <a class="download-link" href="ClientManager.exe" download>Download Client Manager</a>
 </div>
+
+<footer>
+  Contact: <a href="mailto:adnanvic2023@gmail.com" style="color:#00bfff;">adnanvic2023@gmail.com</a>
+  <p>&copy; 2026 Client Manager. All rights reserved.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const downloadBtn = document.getElementById("downloadBtn");
+  const emailFormSection = document.getElementById("emailFormSection");
+  const downloadSection = document.getElementById("downloadSection");
+  const submitEmailBtn = document.getElementById("submitEmail");
+  const emailInput = document.getElementById("emailInput");
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwV3CjUZDYgOpLvVKW7hXqUZdm31ZHA0SpY53BoUqPFE-QnKQlcw8kaGrZp6XQY_D-PpQ/exec";
+
+  function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  downloadBtn.addEventListener("click", function() {
+    const storedEmail = localStorage.getItem("clientEmail");
+    if (!storedEmail) {
+      emailFormSection.style.display = "block";
+    } else {
+      downloadSection.style.display = "block";
+    }
+  });
+
+  submitEmailBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address!");
+      return;
+    }
+
+    localStorage.setItem("clientEmail", email);
+    emailFormSection.style.display = "none";
+    downloadSection.style.display = "block";
+
+    fetch(scriptURL + "?email=" + encodeURIComponent(email), { method: "POST" })
+      .then(response => response.json())
+      .then(data => {
+        if(data.result !== "success"){
+          console.error("Error saving email:", data);
+        }
+      })
+      .catch(err => console.error("Error:", err));
+  });
+});
+</script>
+
+</body>
+</html>
